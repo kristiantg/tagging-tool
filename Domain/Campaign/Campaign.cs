@@ -19,4 +19,13 @@ public class Campaign : Entity
         
         return campaign;
     }
+
+    public static Campaign CreateUpdate(Guid guid, Name name)
+    {
+        var campaign = new Campaign(guid, name);
+        
+        campaign.Raise(new CampaignUpdatedDomainEvent(guid));
+
+        return campaign;
+    }
 }

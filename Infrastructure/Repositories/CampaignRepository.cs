@@ -58,18 +58,40 @@ public class CampaignRepository : ICampaignRepository
         return JsonSerializer.Deserialize<CampaignDto>(itemAsDocument.ToJson());
     }
 
-    public Task<IEnumerable<CampaignDto>> GetAllAsync()
+    public async Task<IEnumerable<CampaignDto>> GetAllAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> UpdateAsync(CampaignDto campaign)
+    public async Task<bool> UpdateAsync(CampaignDto campaign)
     {
-        throw new NotImplementedException();
+        var campaignAsJson = JsonSerializer.Serialize(campaign);
+        var itemAsDocument = Document.FromJson(campaignAsJson);
+        var itemAsAttributes = itemAsDocument.ToAttributeMap();
+
+        var updateItemRequest = new PutItemRequest
+        {
+            TableName = _databaseSettings.Value.TableName,
+            Item = itemAsAttributes
+        };
+
+        var response = await _dynamoDb.PutItemAsync(updateItemRequest);
+        return response.HttpStatusCode == HttpStatusCode.OK;
     }
 
-    public Task<bool> DeleteAsync(Guid id)
+    public async Task<bool> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var deleteItemRequest = new DeleteItemRequest
+        {
+            TableName = _databaseSettings.Value.TableName,
+            Key = new Dictionary<string, AttributeValue>
+            {
+                { "pk", new AttributeValue { S = id.ToString() } },
+                { "sk", new AttributeValue { S = id.ToString() } }
+            }
+        };
+
+        var response = await _dynamoDb.DeleteItemAsync(deleteItemRequest);
+        return response.HttpStatusCode == HttpStatusCode.OK;
     }
 }

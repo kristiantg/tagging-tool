@@ -1,3 +1,4 @@
+using Application.Settings;
 using Infrastructure;
 using TaggingToolApi.Endpoints;
 
@@ -10,6 +11,8 @@ builder.Services.AddInfrastructure();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<DatabaseSettings>(config.GetSection(DatabaseSettings.KeyName));
 
 var app = builder.Build();
 

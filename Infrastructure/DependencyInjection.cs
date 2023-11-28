@@ -11,7 +11,7 @@ public static class DepedencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
-        services.AddSingleton<IAmazonDynamoDB>(_ => new AmazonDynamoDBClient(RegionEndpoint.EUWest2));
+        services.AddSingleton<IAmazonDynamoDB>(_ => new AmazonDynamoDBClient(RegionEndpoint.EUWest1));
         services.AddSingleton<ICampaignRepository, CampaignRepository>();
         services.AddSingleton<ICampaignService, CampaignService>();
         

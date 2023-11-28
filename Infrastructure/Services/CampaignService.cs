@@ -38,13 +38,15 @@ public class CampaignService : ICampaignService
         throw new NotImplementedException();
     }
 
-    public Task<bool> UpdateAsync(Campaign customer)
+    public async Task<bool> UpdateAsync(Campaign campaign)
     {
-        throw new NotImplementedException();
+        var campaignDto = campaign.ToCampaignDto();
+
+        return await _campaignRepository.UpdateAsync(campaignDto);
     }
 
-    public Task<bool> DeleteAsync(Guid id)
+    public async Task<bool> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _campaignRepository.DeleteAsync(id);
     }
 }
