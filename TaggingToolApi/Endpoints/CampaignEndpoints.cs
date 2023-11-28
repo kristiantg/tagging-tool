@@ -39,7 +39,7 @@ public static class CampaignEndpoints
             new TaggingCompleted(request.TaggingCompleted),
             new ChannelsAmount(request.ChannelsAmount),
             new Country(request.Country),
-            new LastModified(request.LastModified),
+            new LastModified(),
             new IsPending(request.IsPending),
             new Brand(request.Brand)
         );
@@ -84,7 +84,7 @@ public static class CampaignEndpoints
             new TaggingCompleted(request.TaggingCompleted),
             new ChannelsAmount(request.ChannelsAmount),
             new Country(request.Country),
-            new LastModified(request.LastModified),
+            new LastModified(),
             new IsPending(request.IsPending),
             new Brand(request.Brand)
         );

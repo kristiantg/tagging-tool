@@ -14,7 +14,7 @@ public static class DtoToDomainMapper
             new TaggingCompleted(campaignDto.TaggingCompleted),
             new ChannelsAmount(campaignDto.ChannelsAmount),
             new Country(campaignDto.Country),
-            new LastModified(campaignDto.LastModified),
+            new LastModified(),
             new IsPending(campaignDto.IsPending),
             new Brand(campaignDto.Brand)
             );
