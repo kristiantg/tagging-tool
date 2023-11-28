@@ -1,11 +1,3 @@
 namespace Application.Contracts.Campaign.Requests;
 
-public class CreateCampaignRequest
-{
-    public string Name { get; init; }
-
-    public CreateCampaignRequest(string name)
-    {
-        Name = name;
-    }
-}
+public record CreateCampaignRequest(string Title, string Status, DateTime LaunchDate, bool TaggingCompleted, int ChannelsAmount, string Country, DateTime LastModified, bool IsPending, string Brand);

@@ -7,9 +7,9 @@ public class CampaignResponse
     public Guid Id { get; set; }
     public string Name { get; set; }
 
-    public CampaignResponse(Guid id, Name name)
+    public CampaignResponse(Guid id, Title title)
     {
         Id = id;
-        Name = name.Value;
+        Name = title.Value;
     }
 }

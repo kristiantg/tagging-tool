@@ -13,19 +13,19 @@ public static class CampaignEndpoints
         var group = app.MapGroup("api/campaigns");
         
         group.MapPost("", CreateCampaign)
-            .WithName("CreateCampaign")
+            .WithName(nameof(CreateCampaign))
             .WithOpenApi();
         
         group.MapGet("{guid}", GetCampaign)
-            .WithName("GetCampaign")
+            .WithName(nameof(GetCampaign))
             .WithOpenApi();
         
         group.MapPut("{guid}", UpdateCampaign)
-            .WithName("UpdateCampaign")
+            .WithName(nameof(UpdateCampaign))
             .WithOpenApi();
         
         group.MapDelete("{guid}", DeleteCampaign)
-            .WithName("DeleteCampaign")
+            .WithName(nameof(DeleteCampaign))
             .WithOpenApi();
     }
     
@@ -33,7 +33,15 @@ public static class CampaignEndpoints
         [FromBody] CreateCampaignRequest request, ICampaignService campaignService)
     {
         var campaign = Campaign.Create(
-            new Name(request.Name)
+            new Title(request.Title),
+            new Status(request.Status),
+            new LaunchDate(request.LaunchDate),
+            new TaggingCompleted(request.TaggingCompleted),
+            new ChannelsAmount(request.ChannelsAmount),
+            new Country(request.Country),
+            new LastModified(request.LastModified),
+            new IsPending(request.IsPending),
+            new Brand(request.Brand)
         );
 
         await campaignService.CreateAsync(campaign);
@@ -70,7 +78,15 @@ public static class CampaignEndpoints
 
         var campaign = Campaign.CreateUpdate(
             guid,
-            new Name(request.Name)
+            new Title(request.Title),
+            new Status(request.Status),
+            new LaunchDate(request.LaunchDate),
+            new TaggingCompleted(request.TaggingCompleted),
+            new ChannelsAmount(request.ChannelsAmount),
+            new Country(request.Country),
+            new LastModified(request.LastModified),
+            new IsPending(request.IsPending),
+            new Brand(request.Brand)
         );
         
         await campaignService.UpdateAsync(campaign);

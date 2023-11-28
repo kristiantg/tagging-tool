@@ -9,8 +9,8 @@ public static class DomainToDtoMapper
     {
         return new CampaignDto()
         {
-            Id = campaign.Id.ToString(),
-            Name = campaign.Name.Value
+            CampaignId = campaign.Id.ToString(),
+            Title = campaign.Title.Value
         };
     }
 }
