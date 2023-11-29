@@ -1,12 +1,12 @@
 namespace Domain.Common;
 
-public sealed class Country()
+public sealed class Name()
 {
-    public Country(string? value) : this()
+    public Name(string? value) : this()
     {
         ArgumentException.ThrowIfNullOrEmpty(value);
         Value = value;
     }
     
-    public string Value { get; }
+    public string? Value { get; }
 }

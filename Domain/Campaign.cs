@@ -6,41 +6,35 @@ namespace Domain;
 
 public class Campaign : Entity
 {
-    public Title Title { get; private set; }
+    public CampaignId CampaignId { get; private set; }
+    public Name Name { get; private set; }
     public Status Status { get; private set; }
-    public LaunchDate LaunchDate { get; private set; }
-    public TaggingCompleted TaggingCompleted { get; private set; } 
-    public ChannelsAmount ChannelsAmount { get; private set; }
-    public Country Country { get; private set; }
+    public TagStatus TagStatus { get; private set; }
+    public Tags Tags { get; private set; }
     public LastModified LastModified { get; private set; }
-    public IsPending IsPending { get; private set; }
-    public Brand Brand { get; private set; }
-
-    public Campaign(CampaignId campaignId, Title title, Status status, LaunchDate launchDate, TaggingCompleted taggingCompleted, ChannelsAmount channelsAmount, Country country, LastModified lastModified, IsPending isPending, Brand brand) : base(campaignId)
+    public Created Created { get; private set; }
+    
+    public Campaign(Guid id, CampaignId campaignId, Name name, Status status, TagStatus tagStatus, Tags tags, LastModified lastModified, Created created) : base(id)
     {
-        Title = title;
+        CampaignId = campaignId;
+        Name = name;
         Status = status;
-        LaunchDate = launchDate;
-        TaggingCompleted = taggingCompleted;
-        ChannelsAmount = channelsAmount;
-        Country = country;
+        TagStatus = tagStatus;
+        Tags = tags;
         LastModified = lastModified;
-        IsPending = isPending;
-        Brand = brand;
+        Created = created;
     }
 
-    public static Campaign Create(Title title, Status status, LaunchDate launchDate, TaggingCompleted taggingCompleted, ChannelsAmount channelsAmount, Country country, LastModified lastModified, IsPending isPending, Brand brand)
+    public static Campaign Create(Name name, Status status, TagStatus tagStatus, Tags tags, LastModified lastModified, Created created)
     {
-        var campaign = new Campaign(new CampaignId(Guid.NewGuid()), 
-            title, 
-            status,
-            launchDate, 
-            taggingCompleted,
-            channelsAmount,
-            country,
-            lastModified,
-            isPending,
-            brand
+        var campaign = new Campaign(Guid.NewGuid(), 
+            new CampaignId(Guid.NewGuid()),
+            name, 
+            status, 
+            tagStatus, 
+            tags, 
+            lastModified, 
+            created
             );
         
         campaign.Raise(new CampaignCreatedDomainEvent(campaign.CampaignId));
@@ -48,25 +42,24 @@ public class Campaign : Entity
         return campaign;
     }
 
-    public static void Delete(Campaign campaign)
+    public static Guid Delete(Campaign campaign)
     {
         campaign.Raise(new CampaignDeletedDomainEvent(campaign.CampaignId));
+        return campaign.CampaignId.Value;
     }
 
-    public static Campaign CreateUpdate(CampaignId guid, Title title, Status status, LaunchDate launchDate, TaggingCompleted taggingCompleted, ChannelsAmount channelsAmount, Country country, LastModified lastModified, IsPending isPending, Brand brand)
+    public static Campaign CreateUpdate(Guid guid, CampaignId campaignId, Name name, Status status, TagStatus tagStatus, Tags tags, LastModified lastModified, Created created)
     {
         var campaign = new Campaign(guid, 
-            title, 
-            status,
-            launchDate, 
-            taggingCompleted,
-            channelsAmount,
-            country,
-            lastModified,
-            isPending,
-            brand);
+            campaignId,
+            name, 
+            status, 
+            tagStatus, 
+            tags, 
+            lastModified, 
+            created);
         
-        campaign.Raise(new CampaignUpdatedDomainEvent(guid));
+        campaign.Raise(new CampaignUpdatedDomainEvent(campaignId));
 
         return campaign;
     }

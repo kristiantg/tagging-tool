@@ -1,8 +1,8 @@
 namespace Domain.Common;
 
-public sealed class ChannelsAmount()
+public sealed class TagStatus()
 {
-    public ChannelsAmount(int value) : this()
+    public TagStatus(int value) : this()
     {
         Value = value;
     }

@@ -5,11 +5,11 @@ namespace Domain.Abstractions;
 public abstract class Entity
 {
     private readonly List<IDomainEvent> _domainEvents = new();
-    protected Entity(CampaignId campaignId)
+    protected Entity(Guid id)
     {
-        CampaignId = campaignId;
+        Id = id;
     }
-    public CampaignId CampaignId { get; init; }
+    public Guid Id { get; init; }
     public List<IDomainEvent> DomainEvents => _domainEvents.ToList();
 
     protected void Raise(IDomainEvent domainEvent)

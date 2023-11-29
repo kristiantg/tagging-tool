@@ -8,16 +8,14 @@ public static class DtoToDomainMapper
 {
     public static Campaign ToCampaign(this CampaignDto campaignDto)
     {
-        return new Campaign(new CampaignId(Guid.Parse(campaignDto.CampaignId)), 
-            new Title(campaignDto.Title),
+        return new Campaign(Guid.Parse(campaignDto.Id),
+            new CampaignId(Guid.Parse(campaignDto.CampaignId)),
+            new Name(campaignDto.Name),
             new Status(campaignDto.Status),
-            new LaunchDate(campaignDto.LaunchDate),
-            new TaggingCompleted(campaignDto.TaggingCompleted),
-            new ChannelsAmount(campaignDto.ChannelsAmount),
-            new Country(campaignDto.Country),
-            new LastModified(),
-            new IsPending(campaignDto.IsPending),
-            new Brand(campaignDto.Brand)
-            );
+            new TagStatus(campaignDto.TagStatus),
+            new Tags(campaignDto.Tags),
+            new LastModified(DateTime.Parse(campaignDto.LastModified)),
+            new Created(DateTime.Parse(campaignDto.Created))
+        );
     }
 }

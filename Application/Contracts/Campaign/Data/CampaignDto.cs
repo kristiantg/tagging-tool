@@ -1,7 +1,11 @@
 using System.Text.Json.Serialization;
 
 namespace Application.Contracts.Campaign.Data;
-
+//      "id": 0,
+// "status": "pending",
+// "name": "Q4 Campaign",
+// "tagStatus": 0,
+// "tags": ["7 channels", "USA"],
 public class CampaignDto
 {
     [JsonPropertyName("pk")]
@@ -10,33 +14,28 @@ public class CampaignDto
     [JsonPropertyName("sk")]
     public string Sk => Pk;
     
+    [JsonPropertyName("id")]
+    public string Id { get; init; } = default!;
+    
     [JsonPropertyName("campaignId")]
     public string CampaignId { get; init; } = default!;
 
-    [JsonPropertyName("title")]
-    public string Title { get; init; } = default!;
+    [JsonPropertyName("name")]
+    public string Name { get; init; } = default!;
     
     [JsonPropertyName("status")]
     public string Status { get; init; } = default!;
     
-    [JsonPropertyName("launchDate")]
-    public DateTime LaunchDate { get; init; } = default!;
-    
-    [JsonPropertyName("taggingCompleted")]
-    public bool TaggingCompleted { get; init; } = default!;
-    
-    [JsonPropertyName("channelsAmount")]
-    public int ChannelsAmount { get; init; } = default!;
-    
-    [JsonPropertyName("country")]
-    public string Country { get; init; } = default!;
-    
     [JsonPropertyName("lastModified")]
-    public DateTime LastModified { get; init; } = default!;
+    public string LastModified { get; init; } = default!;
     
-    [JsonPropertyName("isPending")]
-    public bool IsPending { get; init; } = default!;
+    [JsonPropertyName("created")]
+    public string Created { get; init; } = default!;
     
-    [JsonPropertyName("brand")]
-    public string Brand { get; init; } = default!;
+    [JsonPropertyName("tagStatus")]
+    public int TagStatus { get; init; } = default!;
+    
+    [JsonPropertyName("tags")]
+    public IEnumerable<string> Tags { get; init; } = default!;
+
 }

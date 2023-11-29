@@ -34,15 +34,12 @@ public static class CampaignEndpoints
         [FromBody] CreateCampaignRequest request, ICampaignService campaignService)
     {
         var campaign = Campaign.Create(
-            new Title(request.Title),
+            new Name(request.Name),
             new Status(request.Status),
-            new LaunchDate(request.LaunchDate),
-            new TaggingCompleted(request.TaggingCompleted),
-            new ChannelsAmount(request.ChannelsAmount),
-            new Country(request.Country),
+            new TagStatus(request.TagStatus),
+            new Tags(request.Tags),
             new LastModified(),
-            new IsPending(request.IsPending),
-            new Brand(request.Brand)
+            new Created(DateTime.UtcNow)
         );
 
         await campaignService.CreateAsync(campaign);
@@ -78,16 +75,14 @@ public static class CampaignEndpoints
         }
 
         var campaign = Campaign.CreateUpdate(
+            existingCampaign.Id,
             new CampaignId(guid),
-            new Title(request.Title),
+            new Name(request.Name),
             new Status(request.Status),
-            new LaunchDate(request.LaunchDate),
-            new TaggingCompleted(request.TaggingCompleted),
-            new ChannelsAmount(request.ChannelsAmount),
-            new Country(request.Country),
+            new TagStatus(request.TagStatus),
+            new Tags(request.Tags),
             new LastModified(),
-            new IsPending(request.IsPending),
-            new Brand(request.Brand)
+            new Created(existingCampaign.Created.Value)
         );
         
         await campaignService.UpdateAsync(campaign);
