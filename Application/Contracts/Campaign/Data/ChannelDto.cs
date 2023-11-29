@@ -2,7 +2,8 @@ using System.Text.Json.Serialization;
 using Domain.Common;
 
 namespace Application.Contracts.Campaign.Data;
-public class CampaignDto
+
+public class ChannelDto
 {
     [JsonPropertyName("pk")]
     public string Pk => CampaignId;
@@ -15,12 +16,12 @@ public class CampaignDto
     
     [JsonPropertyName("campaignId")]
     public string CampaignId { get; init; } = default!;
-
-    [JsonPropertyName("name")]
-    public string Name { get; init; } = default!;
     
-    [JsonPropertyName("status")]
-    public string Status { get; init; } = default!;
+    [JsonPropertyName("channelId")]
+    public string ChannelId { get; init; } = default!;
+    
+    [JsonPropertyName("launchDate")]
+    public string LaunchDate { get; init; } = default!;
     
     [JsonPropertyName("lastModified")]
     public string LastModified { get; init; } = default!;
@@ -28,10 +29,6 @@ public class CampaignDto
     [JsonPropertyName("created")]
     public string Created { get; init; } = default!;
     
-    [JsonPropertyName("tagStatus")]
-    public int TagStatus { get; init; } = default!;
-    
-    [JsonPropertyName("tags")]
-    public IEnumerable<Tag> Tags { get; init; } = default!;
-
+    [JsonPropertyName("title")]
+    public string Title { get; init; } = default!;
 }

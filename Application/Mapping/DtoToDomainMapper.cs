@@ -1,6 +1,7 @@
 using Application.Contracts.Campaign.Data;
 using Domain;
 using Domain.Common;
+using Domain.DomainEvents;
 
 namespace Application.Mapping;
 
@@ -17,5 +18,16 @@ public static class DtoToDomainMapper
             new LastModified(DateTime.Parse(campaignDto.LastModified)),
             new Created(DateTime.Parse(campaignDto.Created))
         );
+    }
+
+    public static Channel ToChannel(this ChannelDto channelDto)
+    {
+        return new Channel(Guid.Parse(channelDto.Id),
+            new ChannelId(Guid.Parse(channelDto.ChannelId)),
+            new CampaignId(Guid.Parse(channelDto.CampaignId)),
+            new Title(channelDto.Title),
+            new LaunchDate(DateTime.Parse(channelDto.LaunchDate)),
+            new LastModified(DateTime.Parse(channelDto.LastModified)),
+            new Created(DateTime.Parse(channelDto.Created)));
     }
 }

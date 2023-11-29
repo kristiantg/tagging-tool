@@ -14,6 +14,8 @@ public static class DepedencyInjection
         services.AddSingleton<IAmazonDynamoDB>(_ => new AmazonDynamoDBClient(RegionEndpoint.EUWest1));
         services.AddSingleton<ICampaignRepository, CampaignRepository>();
         services.AddSingleton<ICampaignService, CampaignService>();
+        services.AddSingleton<IChannelRepository, ChannelRepository>();
+        services.AddSingleton<IChannelService, ChannelService>();
         
         return services;
     }
