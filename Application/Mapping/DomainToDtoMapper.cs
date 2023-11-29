@@ -1,5 +1,5 @@
 using Application.Contracts.Campaign.Data;
-using Domain.Campaign;
+using Domain;
 
 namespace Application.Mapping;
 
@@ -9,7 +9,7 @@ public static class DomainToDtoMapper
     {
         return new CampaignDto()
         {
-            CampaignId = campaign.Id.ToString(),
+            CampaignId = campaign.CampaignId.ToString(),
             Title = campaign.Title.Value
         };
     }

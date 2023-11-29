@@ -1,7 +1,8 @@
 using Domain.Abstractions;
-using Domain.Campaign.Common;
+using Domain.Common;
+using Domain.DomainEvents;
 
-namespace Domain.Campaign;
+namespace Domain;
 
 public class Campaign : Entity
 {
@@ -15,7 +16,7 @@ public class Campaign : Entity
     public IsPending IsPending { get; private set; }
     public Brand Brand { get; private set; }
 
-    public Campaign(Guid id, Title title, Status status, LaunchDate launchDate, TaggingCompleted taggingCompleted, ChannelsAmount channelsAmount, Country country, LastModified lastModified, IsPending isPending, Brand brand) : base(id)
+    public Campaign(CampaignId campaignId, Title title, Status status, LaunchDate launchDate, TaggingCompleted taggingCompleted, ChannelsAmount channelsAmount, Country country, LastModified lastModified, IsPending isPending, Brand brand) : base(campaignId)
     {
         Title = title;
         Status = status;
@@ -30,7 +31,7 @@ public class Campaign : Entity
 
     public static Campaign Create(Title title, Status status, LaunchDate launchDate, TaggingCompleted taggingCompleted, ChannelsAmount channelsAmount, Country country, LastModified lastModified, IsPending isPending, Brand brand)
     {
-        var campaign = new Campaign(Guid.NewGuid(), 
+        var campaign = new Campaign(new CampaignId(Guid.NewGuid()), 
             title, 
             status,
             launchDate, 
@@ -42,12 +43,17 @@ public class Campaign : Entity
             brand
             );
         
-        campaign.Raise(new CampaignCreatedDomainEvent(campaign.Id));
+        campaign.Raise(new CampaignCreatedDomainEvent(campaign.CampaignId));
         
         return campaign;
     }
 
-    public static Campaign CreateUpdate(Guid guid, Title title, Status status, LaunchDate launchDate, TaggingCompleted taggingCompleted, ChannelsAmount channelsAmount, Country country, LastModified lastModified, IsPending isPending, Brand brand)
+    public static void Delete(Campaign campaign)
+    {
+        campaign.Raise(new CampaignDeletedDomainEvent(campaign.CampaignId));
+    }
+
+    public static Campaign CreateUpdate(CampaignId guid, Title title, Status status, LaunchDate launchDate, TaggingCompleted taggingCompleted, ChannelsAmount channelsAmount, Country country, LastModified lastModified, IsPending isPending, Brand brand)
     {
         var campaign = new Campaign(guid, 
             title, 

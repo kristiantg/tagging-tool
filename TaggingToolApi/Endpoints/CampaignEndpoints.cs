@@ -1,7 +1,7 @@
 using Application.Contracts.Campaign.Requests;
 using Application.Mapping;
-using Domain.Campaign;
-using Domain.Campaign.Common;
+using Domain;
+using Domain.Common;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -78,7 +78,7 @@ public static class CampaignEndpoints
         }
 
         var campaign = Campaign.CreateUpdate(
-            guid,
+            new CampaignId(guid),
             new Title(request.Title),
             new Status(request.Status),
             new LaunchDate(request.LaunchDate),

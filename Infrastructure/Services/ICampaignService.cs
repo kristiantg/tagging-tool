@@ -1,4 +1,4 @@
-using Domain.Campaign;
+using Domain;
 
 namespace Infrastructure.Services;
 

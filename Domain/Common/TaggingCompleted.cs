@@ -1,4 +1,4 @@
-namespace Domain.Campaign.Common;
+namespace Domain.Common;
 
 public sealed class TaggingCompleted()
 {

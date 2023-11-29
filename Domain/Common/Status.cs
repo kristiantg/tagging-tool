@@ -1,8 +1,8 @@
-namespace Domain.Campaign.Common;
+namespace Domain.Common;
 
-public sealed class Brand()
+public sealed class Status()
 {
-    public Brand(string? value) : this()
+    public Status(string? value) : this()
     {
         ArgumentException.ThrowIfNullOrEmpty(value);
         Value = value;

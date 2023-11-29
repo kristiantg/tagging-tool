@@ -1,13 +1,15 @@
+using Domain.Common;
+
 namespace Domain.Abstractions;
 
 public abstract class Entity
 {
     private readonly List<IDomainEvent> _domainEvents = new();
-    protected Entity(Guid id)
+    protected Entity(CampaignId campaignId)
     {
-        Id = id;
+        CampaignId = campaignId;
     }
-    public Guid Id { get; init; }
+    public CampaignId CampaignId { get; init; }
     public List<IDomainEvent> DomainEvents => _domainEvents.ToList();
 
     protected void Raise(IDomainEvent domainEvent)

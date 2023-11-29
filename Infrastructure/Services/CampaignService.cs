@@ -1,5 +1,5 @@
 using Application.Mapping;
-using Domain.Campaign;
+using Domain;
 using Infrastructure.Repositories;
 
 namespace Infrastructure.Services;
@@ -15,11 +15,11 @@ public class CampaignService : ICampaignService
 
     public async Task<bool> CreateAsync(Campaign campaign)
     {
-        var existingUser = await _campaignRepository.GetAsync(campaign.Id);
+        var existingUser = await _campaignRepository.GetAsync(campaign.CampaignId.Value);
         
         if (existingUser is not null)
         {
-            var message = $"A campaign with id {campaign.Id} already exists.";
+            var message = $"A campaign with id {campaign.CampaignId} already exists.";
         }
         
         var campaignDto = campaign.ToCampaignDto();
