@@ -1,4 +1,5 @@
 using Domain.Abstractions;
+using Domain.Campaign.Common;
 
 namespace Domain.Campaign;
 

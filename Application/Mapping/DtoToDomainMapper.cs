@@ -1,5 +1,6 @@
 using Application.Contracts.Campaign.Data;
 using Domain.Campaign;
+using Domain.Campaign.Common;
 
 namespace Application.Mapping;
 

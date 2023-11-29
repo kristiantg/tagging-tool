@@ -1,4 +1,4 @@
-namespace Domain.Campaign;
+namespace Domain.Campaign.Common;
 
 public sealed class LaunchDate()
 {

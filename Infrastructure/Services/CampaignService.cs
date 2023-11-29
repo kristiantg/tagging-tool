@@ -41,7 +41,7 @@ public class CampaignService : ICampaignService
     public async Task<bool> UpdateAsync(Campaign campaign)
     {
         var campaignDto = campaign.ToCampaignDto();
-
+        
         return await _campaignRepository.UpdateAsync(campaignDto);
     }
 

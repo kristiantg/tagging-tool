@@ -1,4 +1,5 @@
 using Domain.Campaign;
+using Domain.Campaign.Common;
 
 namespace Application.Contracts.Campaign.Responses;
 

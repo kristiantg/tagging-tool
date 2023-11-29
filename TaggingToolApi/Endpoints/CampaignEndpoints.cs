@@ -1,6 +1,7 @@
 using Application.Contracts.Campaign.Requests;
 using Application.Mapping;
 using Domain.Campaign;
+using Domain.Campaign.Common;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 

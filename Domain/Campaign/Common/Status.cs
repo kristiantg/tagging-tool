@@ -1,8 +1,8 @@
-namespace Domain.Campaign;
+namespace Domain.Campaign.Common;
 
-public sealed class Country()
+public sealed class Status()
 {
-    public Country(string? value) : this()
+    public Status(string? value) : this()
     {
         ArgumentException.ThrowIfNullOrEmpty(value);
         Value = value;
