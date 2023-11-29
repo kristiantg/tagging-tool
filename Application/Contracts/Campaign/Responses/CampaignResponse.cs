@@ -9,9 +9,9 @@ public class CampaignResponse
     public string Name { get; set; }
     public string Status { get; set; }
     public int TagStatus { get; set; }
-    public IEnumerable<string> Tags { get; set; }
+    public IEnumerable<Tag> Tags { get; set; }
 
-    public CampaignResponse(Guid id, Guid campaignId, string name, string status, int tagStatus, IEnumerable<string> tags)
+    public CampaignResponse(Guid id, Guid campaignId, string name, string status, int tagStatus, IEnumerable<Tag> tags)
     {
         Id = id;
         CampaignId = campaignId;

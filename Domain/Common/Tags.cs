@@ -2,9 +2,9 @@ namespace Domain.Common;
 
 public sealed class Tags
 {
-    public IEnumerable<string> Value { get; }
+    public IEnumerable<Tag> Value { get; }
 
-    public Tags(IEnumerable<string> value)
+    public Tags(IEnumerable<Tag> value)
     {
         Value = value;
     }

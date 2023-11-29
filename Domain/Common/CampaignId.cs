@@ -6,7 +6,7 @@ public sealed record CampaignId()
     {
         if (value == Guid.Empty)
         {
-            throw new ArgumentException("Customer Id cannot be empty", nameof(CampaignId));
+            throw new ArgumentException("Campaign Id cannot be empty", nameof(CampaignId));
         }
         
         Value = value;

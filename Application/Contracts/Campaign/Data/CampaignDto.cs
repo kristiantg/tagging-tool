@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Domain.Common;
 
 namespace Application.Contracts.Campaign.Data;
 //      "id": 0,
@@ -36,6 +37,6 @@ public class CampaignDto
     public int TagStatus { get; init; } = default!;
     
     [JsonPropertyName("tags")]
-    public IEnumerable<string> Tags { get; init; } = default!;
+    public IEnumerable<Tag> Tags { get; init; } = default!;
 
 }
