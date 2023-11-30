@@ -1,6 +1,6 @@
 using Domain.Common;
 
-namespace Application.Contracts.Campaign.Responses;
+namespace Application.Contracts.Responses;
 
 public class CampaignResponse
 {
@@ -9,9 +9,9 @@ public class CampaignResponse
     public string Name { get; set; }
     public string Status { get; set; }
     public int TagStatus { get; set; }
-    public IEnumerable<Tag> Tags { get; set; }
+    public IEnumerable<string> Tags { get; set; }
 
-    public CampaignResponse(Guid id, Guid campaignId, string name, string status, int tagStatus, IEnumerable<Tag> tags)
+    public CampaignResponse(Guid id, Guid campaignId, string name, string status, int tagStatus, IEnumerable<string> tags)
     {
         Id = id;
         CampaignId = campaignId;

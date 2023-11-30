@@ -1,6 +1,4 @@
-using Domain.Common;
-
-namespace Application.Contracts.Campaign.Responses;
+namespace Application.Contracts.Responses;
 
 public class ChannelResponse
 {

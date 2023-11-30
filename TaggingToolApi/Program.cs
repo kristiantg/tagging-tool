@@ -24,6 +24,7 @@ if (app.Environment.IsDevelopment())
 
 app.MapCampaignEndpoints();
 app.MapChannelEndpoints();
+app.MapTagEndpoints();
 
 app.UseHttpsRedirection();
 

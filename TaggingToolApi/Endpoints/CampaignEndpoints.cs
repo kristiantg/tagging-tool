@@ -1,4 +1,4 @@
-using Application.Contracts.Campaign.Requests;
+using Application.Contracts.Requests;
 using Application.Mapping;
 using Domain;
 using Domain.Common;
@@ -38,7 +38,7 @@ public static class CampaignEndpoints
             new Status(request.Status),
             new TagStatus(request.TagStatus),
             new Tags(request.Tags),
-            new LastModified(),
+            new LastModified(DateTime.UtcNow),
             new Created(DateTime.UtcNow)
         );
 
@@ -81,7 +81,7 @@ public static class CampaignEndpoints
             new Status(request.Status),
             new TagStatus(request.TagStatus),
             new Tags(request.Tags),
-            new LastModified(),
+            new LastModified(DateTime.UtcNow),
             new Created(existingCampaign.Created.Value)
         );
         

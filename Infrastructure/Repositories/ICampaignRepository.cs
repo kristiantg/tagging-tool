@@ -1,4 +1,4 @@
-using Application.Contracts.Campaign.Data;
+using Application.Contracts.Data;
 
 namespace Infrastructure.Repositories;
 

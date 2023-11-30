@@ -1,4 +1,4 @@
-using Application.Contracts.Campaign.Requests;
+using Application.Contracts.Requests;
 using Application.Mapping;
 using Domain;
 using Domain.Common;
@@ -79,7 +79,7 @@ public static class ChannelEndpoints
             return Results.NotFound();
         }
         
-        var campaign = await campaignService.GetAsync(request.CampaignId);
+        var campaign = await campaignService.GetAsync(request.ChannelId);
 
         if (campaign is null)
         {

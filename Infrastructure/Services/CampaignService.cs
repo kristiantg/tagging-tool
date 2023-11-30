@@ -15,9 +15,9 @@ public class CampaignService : ICampaignService
 
     public async Task<bool> CreateAsync(Campaign campaign)
     {
-        var existingUser = await _campaignRepository.GetAsync(campaign.CampaignId.Value);
+        var existingCampaign = await _campaignRepository.GetAsync(campaign.CampaignId.Value);
         
-        if (existingUser is not null)
+        if (existingCampaign is not null)
         {
             var message = $"A campaign with id {campaign.CampaignId} already exists.";
         }

@@ -1,4 +1,4 @@
-using Application.Contracts.Campaign.Data;
+using Application.Contracts.Data;
 using Domain;
 using Domain.Common;
 using Domain.DomainEvents;
@@ -29,5 +29,19 @@ public static class DtoToDomainMapper
             new LaunchDate(DateTime.Parse(channelDto.LaunchDate)),
             new LastModified(DateTime.Parse(channelDto.LastModified)),
             new Created(DateTime.Parse(channelDto.Created)));
+    }
+
+    public static Domain.Tag ToTag(this TagDto tagDto)
+    {
+        return new Domain.Tag(Guid.Parse(tagDto.Id),
+            new TagId(Guid.Parse(tagDto.TagId)),
+            new CampaignId(Guid.Parse(tagDto.CampaignId)),
+            new ChannelId(Guid.Parse(tagDto.ChannelId)),
+            new Brand(tagDto.Brand),
+            tagDto.Value,
+            tagDto.Options,
+            new LastModified(DateTime.Parse(tagDto.LastModified)),
+            new Created(DateTime.Parse(tagDto.Created))
+            );
     }
 }

@@ -16,7 +16,8 @@ public static class DepedencyInjection
         services.AddSingleton<ICampaignService, CampaignService>();
         services.AddSingleton<IChannelRepository, ChannelRepository>();
         services.AddSingleton<IChannelService, ChannelService>();
-        
+        services.AddSingleton<ITagRepository, TagRepository>();
+        services.AddSingleton<ITagService, TagService>();
         return services;
     }
 }

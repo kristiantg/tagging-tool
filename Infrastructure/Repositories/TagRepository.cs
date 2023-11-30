@@ -9,21 +9,21 @@ using Microsoft.Extensions.Options;
 
 namespace Infrastructure.Repositories;
 
-public class CampaignRepository : ICampaignRepository
+public class TagRepository : ITagRepository
 {
     private readonly IAmazonDynamoDB _dynamoDb;
     private readonly IOptions<DatabaseSettings> _databaseSettings;
 
-    public CampaignRepository(IAmazonDynamoDB dynamoDb,
+    public TagRepository(IAmazonDynamoDB dynamoDb,
         IOptions<DatabaseSettings> databaseSettings)
     {
         _dynamoDb = dynamoDb;
         _databaseSettings = databaseSettings;
     }
-    public async Task<bool> CreateAsync(CampaignDto campaign)
+    public async Task<bool> CreateAsync(TagDto tag)
     {
-        var campaignAsJson = JsonSerializer.Serialize(campaign);
-        var itemAsDocument = Document.FromJson(campaignAsJson);
+        var tagAsJson = JsonSerializer.Serialize(tag);
+        var itemAsDocument = Document.FromJson(tagAsJson);
         var itemAsAttributes = itemAsDocument.ToAttributeMap();
 
         var createItemRequest = new PutItemRequest
@@ -36,7 +36,7 @@ public class CampaignRepository : ICampaignRepository
         return response.HttpStatusCode == HttpStatusCode.OK;
     }
 
-    public async Task<CampaignDto?> GetAsync(Guid id)
+    public async Task<TagDto?> GetAsync(Guid id)
     {
         var request = new GetItemRequest
         {
@@ -55,18 +55,18 @@ public class CampaignRepository : ICampaignRepository
         }
 
         var itemAsDocument = Document.FromAttributeMap(response.Item);
-        return JsonSerializer.Deserialize<CampaignDto>(itemAsDocument.ToJson());
+        return JsonSerializer.Deserialize<TagDto>(itemAsDocument.ToJson());
     }
 
-    public async Task<IEnumerable<CampaignDto>> GetAllAsync()
+    public async Task<IEnumerable<TagDto>> GetAllAsync()
     {
         throw new NotImplementedException();
     }
 
-    public async Task<bool> UpdateAsync(CampaignDto campaign)
+    public async Task<bool> UpdateAsync(TagDto tag)
     {
-        var campaignAsJson = JsonSerializer.Serialize(campaign);
-        var itemAsDocument = Document.FromJson(campaignAsJson);
+        var tagAsJson = JsonSerializer.Serialize(tag);
+        var itemAsDocument = Document.FromJson(tagAsJson);
         var itemAsAttributes = itemAsDocument.ToAttributeMap();
 
         var updateItemRequest = new PutItemRequest

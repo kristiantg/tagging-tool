@@ -1,4 +1,4 @@
-using Application.Contracts.Campaign.Data;
+using Application.Contracts.Data;
 using Domain;
 using Domain.DomainEvents;
 
@@ -30,6 +30,21 @@ public static class DomainToDtoMapper
             ChannelId = channel.ChannelId.Value.ToString(),
             Title = channel.Title.Value,
             LaunchDate = channel.LaunchDate.Value.ToShortDateString()
+        };
+    }
+
+    public static TagDto ToTagDto(this Tag tag)
+    {
+        return new TagDto()
+        {
+            Id = tag.Id.ToString(),
+            CampaignId = tag.CampaignId.Value.ToString(),
+            ChannelId = tag.ChannelId.Value.ToString(),
+            Brand = tag.Brand.Value,
+            Created = tag.Created.Value.ToShortDateString(),
+            LastModified = tag.LastModified.Value.ToShortDateString(),
+            Options = tag.Options,
+            TagId = tag.Id.ToString()
         };
     }
 }

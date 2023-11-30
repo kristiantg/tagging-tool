@@ -3,7 +3,7 @@ using System.Text.Json;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
-using Application.Contracts.Campaign.Data;
+using Application.Contracts.Data;
 using Application.Settings;
 using Microsoft.Extensions.Options;
 
@@ -22,8 +22,8 @@ public class ChannelRepository : IChannelRepository
     }
     public async Task<bool> CreateAsync(ChannelDto channel)
     {
-        var campaignAsJson = JsonSerializer.Serialize(channel);
-        var itemAsDocument = Document.FromJson(campaignAsJson);
+        var channelAsJson = JsonSerializer.Serialize(channel);
+        var itemAsDocument = Document.FromJson(channelAsJson);
         var itemAsAttributes = itemAsDocument.ToAttributeMap();
 
         var createItemRequest = new PutItemRequest
