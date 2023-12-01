@@ -6,7 +6,7 @@ namespace Application.Contracts.Data;
 public class TagDto
 {
     [JsonPropertyName("pk")]
-    public string Pk => CampaignId;
+    public string Pk => TagId;
 
     [JsonPropertyName("sk")]
     public string Sk => Pk;
