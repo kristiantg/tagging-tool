@@ -29,7 +29,9 @@ public static class DomainToDtoMapper
             CampaignId = channel.CampaignId.Value.ToString(),
             ChannelId = channel.ChannelId.Value.ToString(),
             Title = channel.Title.Value,
-            LaunchDate = channel.LaunchDate.Value.ToShortDateString()
+            LaunchDate = channel.LaunchDate.Value.ToShortDateString(),
+            Created = channel.Created.Value.ToShortDateString(),
+            LastModified = channel.LastModified.Value.ToShortDateString()
         };
     }
 
