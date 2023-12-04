@@ -3,4 +3,4 @@ using Domain.Common;
 
 namespace Domain.DomainEvents;
 
-public sealed record CampaignDeletedDomainEvent(CampaignId Id) : IDomainEvent;
+public sealed record CampaignDeletedDomainEvent(Guid Id) : IDomainEvent;

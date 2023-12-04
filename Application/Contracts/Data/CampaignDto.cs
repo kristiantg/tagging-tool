@@ -5,16 +5,13 @@ namespace Application.Contracts.Data;
 public class CampaignDto
 {
     [JsonPropertyName("pk")]
-    public string Pk => CampaignId;
+    public string Pk => Id;
 
     [JsonPropertyName("sk")]
     public string Sk => Pk;
     
     [JsonPropertyName("id")]
     public string Id { get; init; } = default!;
-    
-    [JsonPropertyName("campaignId")]
-    public string CampaignId { get; init; } = default!;
 
     [JsonPropertyName("name")]
     public string Name { get; init; } = default!;
@@ -34,4 +31,6 @@ public class CampaignDto
     [JsonPropertyName("tags")]
     public IEnumerable<string> Tags { get; init; } = default!;
 
+    [JsonPropertyName("channels")]
+    public IEnumerable<ChannelDto>? Channels { get; init; } = default!;
 }

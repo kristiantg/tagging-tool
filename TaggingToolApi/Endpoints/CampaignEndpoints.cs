@@ -42,6 +42,11 @@ public static class CampaignEndpoints
             new Status(request.Status),
             new TagStatus(request.TagStatus),
             new Tags(request.Tags),
+            request.Channels?.Select(channel => new Channel(
+                new Title(channel.Title),
+                new Tags(channel.Tags),
+                new LaunchDate(channel.LaunchDate)
+            )),
             new LastModified(DateTime.UtcNow),
             new Created(DateTime.UtcNow)
         );
@@ -88,12 +93,16 @@ public static class CampaignEndpoints
         }
 
         var campaign = Campaign.CreateUpdate(
-            existingCampaign.Id,
-            new CampaignId(guid),
+            request.CampaignId,
             new Name(request.Name),
             new Status(request.Status),
             new TagStatus(request.TagStatus),
             new Tags(request.Tags),
+            request.Channels?.Select(channel => new Channel(
+                new Title(channel.Title),
+                new Tags(channel.Tags),
+                new LaunchDate(channel.LaunchDate)
+            )),
             new LastModified(DateTime.UtcNow),
             new Created(existingCampaign.Created.Value)
         );

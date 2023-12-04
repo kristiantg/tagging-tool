@@ -15,11 +15,11 @@ public class CampaignService : ICampaignService
 
     public async Task<bool> CreateAsync(Campaign campaign)
     {
-        var existingCampaign = await _campaignRepository.GetAsync(campaign.CampaignId.Value);
+        var existingCampaign = await _campaignRepository.GetAsync(campaign.Id);
         
         if (existingCampaign is not null)
         {
-            var message = $"A campaign with id {campaign.CampaignId} already exists.";
+            var message = $"A campaign with id {campaign.Id} already exists.";
         }
         
         var campaignDto = campaign.ToCampaignDto();

@@ -6,60 +6,60 @@ namespace Domain;
 
 public class Campaign : Entity
 {
-    public CampaignId CampaignId { get; private set; }
     public Name Name { get; private set; }
     public Status Status { get; private set; }
     public TagStatus TagStatus { get; private set; }
     public Tags Tags { get; private set; }
     public LastModified LastModified { get; private set; }
     public Created Created { get; private set; }
-    
-    public Campaign(Guid id, CampaignId campaignId, Name name, Status status, TagStatus tagStatus, Tags tags, LastModified lastModified, Created created) : base(id)
+    public IEnumerable<Channel>? Channels { get; set; }
+
+    public Campaign(Guid id, Name name, Status status, TagStatus tagStatus, Tags tags, LastModified lastModified, Created created, IEnumerable<Channel>? channels) : base(id)
     {
-        CampaignId = campaignId;
         Name = name;
         Status = status;
         TagStatus = tagStatus;
         Tags = tags;
         LastModified = lastModified;
         Created = created;
+        Channels = channels;
     }
 
-    public static Campaign Create(Name name, Status status, TagStatus tagStatus, Tags tags, LastModified lastModified, Created created)
+    public static Campaign Create(Name name, Status status, TagStatus tagStatus, Tags tags, IEnumerable<Channel>? channels, LastModified lastModified, Created created)
     {
         var campaign = new Campaign(Guid.NewGuid(), 
-            new CampaignId(Guid.NewGuid()),
             name, 
             status, 
             tagStatus, 
             tags, 
             lastModified, 
-            created
+            created,
+            channels
             );
         
-        campaign.Raise(new CampaignCreatedDomainEvent(campaign.CampaignId));
+        campaign.Raise(new CampaignCreatedDomainEvent(campaign.Id));
         
         return campaign;
     }
 
     public static Guid Delete(Campaign campaign)
     {
-        campaign.Raise(new CampaignDeletedDomainEvent(campaign.CampaignId));
-        return campaign.CampaignId.Value;
+        campaign.Raise(new CampaignDeletedDomainEvent(campaign.Id));
+        return campaign.Id;
     }
 
-    public static Campaign CreateUpdate(Guid guid, CampaignId campaignId, Name name, Status status, TagStatus tagStatus, Tags tags, LastModified lastModified, Created created)
+    public static Campaign CreateUpdate(Guid guid, Name name, Status status, TagStatus tagStatus, Tags tags, IEnumerable<Channel>? channels, LastModified lastModified, Created created)
     {
         var campaign = new Campaign(guid, 
-            campaignId,
             name, 
             status, 
             tagStatus, 
             tags, 
             lastModified, 
-            created);
+            created,
+            channels);
         
-        campaign.Raise(new CampaignUpdatedDomainEvent(campaignId));
+        campaign.Raise(new CampaignUpdatedDomainEvent(guid));
 
         return campaign;
     }

@@ -1,3 +1,3 @@
 namespace Application.Contracts.Requests;
 
-public record UpdateChannelRequest(Guid ChannelId, Guid CampaignId, string Title, DateTime LaunchDate);
+public record UpdateChannelRequest(Guid ChannelId, IEnumerable<string> Tags, string Title, DateTime LaunchDate);
