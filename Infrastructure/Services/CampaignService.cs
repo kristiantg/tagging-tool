@@ -33,9 +33,10 @@ public class CampaignService : ICampaignService
         return campaignDto?.ToCampaign();
     }
 
-    public Task<IEnumerable<Campaign>> GetAllAsync()
+    public async Task<IEnumerable<Campaign>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var campaignDtos = await _campaignRepository.GetAllAsync();
+        return campaignDtos.Select(dto => dto.ToCampaign());
     }
 
     public async Task<bool> UpdateAsync(Campaign campaign)

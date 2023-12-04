@@ -21,6 +21,10 @@ public static class CampaignEndpoints
             .WithName(nameof(GetCampaign))
             .WithOpenApi();
         
+        group.MapGet("", GetCampaigns)
+            .WithName(nameof(GetCampaigns))
+            .WithOpenApi();
+        
         group.MapPut("{guid}", UpdateCampaign)
             .WithName(nameof(UpdateCampaign))
             .WithOpenApi();
@@ -46,6 +50,15 @@ public static class CampaignEndpoints
 
         var campaignResponse = campaign.ToCampaignResponse();
         
+        return Results.Ok(campaignResponse);
+    }
+    
+    private static async Task<IResult> GetCampaigns(ICampaignService campaignService)
+    {
+        var campaigns = await campaignService.GetAllAsync();
+
+        var campaignResponse = campaigns.Select(campaign => campaign.ToCampaignResponse());
+
         return Results.Ok(campaignResponse);
     }
 

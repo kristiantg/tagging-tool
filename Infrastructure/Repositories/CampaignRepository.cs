@@ -60,7 +60,23 @@ public class CampaignRepository : ICampaignRepository
 
     public async Task<IEnumerable<CampaignDto>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var request = new ScanRequest
+        {
+            TableName = _databaseSettings.Value.TableName,
+        };
+
+        var response = await _dynamoDb.ScanAsync(request);
+
+        var campaigns = new List<CampaignDto>();
+
+        foreach (var item in response.Items)
+        {
+            var itemAsDocument = Document.FromAttributeMap(item);
+            var campaign = JsonSerializer.Deserialize<CampaignDto>(itemAsDocument.ToJson());
+            campaigns.Add(campaign);
+        }
+
+        return campaigns;
     }
 
     public async Task<bool> UpdateAsync(CampaignDto campaign)
