@@ -1,3 +1,4 @@
+using Application.Contracts.Requests;
 using Domain;
 
 namespace Infrastructure.Services;
@@ -8,7 +9,7 @@ public interface ICampaignService
 
     Task<Campaign?> GetAsync(Guid id);
 
-    Task<IEnumerable<Campaign>> GetAllAsync();
+    Task<IEnumerable<Campaign>> GetAllAsync(GetCampaignsQuery query);
 
     Task<bool> UpdateAsync(Campaign campaign);
 

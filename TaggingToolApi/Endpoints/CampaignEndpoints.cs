@@ -58,9 +58,16 @@ public static class CampaignEndpoints
         return Results.Ok(campaignResponse);
     }
     
-    private static async Task<IResult> GetCampaigns(ICampaignService campaignService)
+    private static async Task<IResult> GetCampaigns(
+        ICampaignService campaignService,
+        string? searchTerm,
+        string? searchColumn,
+        string? searchOrder,
+        int? page,
+        int? pageSize)
     {
-        var campaigns = await campaignService.GetAllAsync();
+        var query = new GetCampaignsQuery(searchTerm, searchColumn, searchOrder, page, pageSize);
+        var campaigns = await campaignService.GetAllAsync(query);
 
         var campaignResponse = campaigns.Select(campaign => campaign.ToCampaignResponse());
 

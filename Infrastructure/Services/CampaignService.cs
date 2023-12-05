@@ -1,3 +1,4 @@
+using Application.Contracts.Requests;
 using Application.Mapping;
 using Domain;
 using Infrastructure.Repositories;
@@ -33,9 +34,9 @@ public class CampaignService : ICampaignService
         return campaignDto?.ToCampaign();
     }
 
-    public async Task<IEnumerable<Campaign>> GetAllAsync()
+    public async Task<IEnumerable<Campaign>> GetAllAsync(GetCampaignsQuery query)
     {
-        var campaignDtos = await _campaignRepository.GetAllAsync();
+        var campaignDtos = await _campaignRepository.GetAllAsync(query);
         return campaignDtos.Select(dto => dto.ToCampaign());
     }
 

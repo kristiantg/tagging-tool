@@ -4,6 +4,7 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
 using Application.Contracts.Data;
+using Application.Contracts.Requests;
 using Application.Settings;
 using Microsoft.Extensions.Options;
 
@@ -58,24 +59,30 @@ public class CampaignRepository : ICampaignRepository
         return JsonSerializer.Deserialize<CampaignDto>(itemAsDocument.ToJson());
     }
 
-    public async Task<IEnumerable<CampaignDto>> GetAllAsync()
+    public async Task<IEnumerable<CampaignDto>> GetAllAsync(GetCampaignsQuery query)
     {
-        var request = new ScanRequest
-        {
-            TableName = _databaseSettings.Value.TableName,
-        };
-
-        var response = await _dynamoDb.ScanAsync(request);
-
         var campaigns = new List<CampaignDto>();
+        Dictionary<string, AttributeValue> lastKeyEvaluated = null;
 
-        foreach (var item in response.Items)
+        do
         {
-            var itemAsDocument = Document.FromAttributeMap(item);
-            var campaign = JsonSerializer.Deserialize<CampaignDto>(itemAsDocument.ToJson());
-            campaigns.Add(campaign);
-        }
+            var request = new ScanRequest
+            {
+                TableName = _databaseSettings.Value.TableName,
+                Limit = query.PageSize ?? 200,
+                ExclusiveStartKey = lastKeyEvaluated,
+            };
 
+            var response = await _dynamoDb.ScanAsync(request);
+        
+            foreach (var item in response.Items)
+            {
+                var itemAsDocument = Document.FromAttributeMap(item);
+                var campaign = JsonSerializer.Deserialize<CampaignDto>(itemAsDocument.ToJson());
+                campaigns.Add(campaign);
+            }
+        } while (lastKeyEvaluated != null && lastKeyEvaluated.Count != 0);
+        
         return campaigns;
     }
 
