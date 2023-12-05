@@ -11,7 +11,7 @@ public static class CampaignEndpoints
 {
     public static void MapCampaignEndpoints(this IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("api/campaigns");
+        var group = app.MapGroup("api/campaigns").RequireAuthorization();
         
         group.MapPost("", CreateCampaign)
             .WithName(nameof(CreateCampaign))
