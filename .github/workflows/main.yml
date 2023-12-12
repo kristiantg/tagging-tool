@@ -28,16 +28,18 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14
-          
+
       - name: Install Dependencies
         run: npm install
         working-directory: backend-cdk
 
       - name: Install TS-Node
         run: 'sudo npm install -g ts-node'
+        working-directory: backend-cdk
 
       - name: Install AWS CDK
         run: 'sudo npm install -g aws-cdk'
+        working-directory: backend-cdk
 
       - name: Synthesize CDK
         run: npx cdk synth
@@ -45,3 +47,4 @@ jobs:
 
       - name: CDK Deploy
         run: cdk deploy
+        working-directory: backend-cdk
