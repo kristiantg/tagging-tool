@@ -31,20 +31,20 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-        working-directory: backend-cdk
+        working-directory: backend
 
       - name: Install TS-Node
         run: sudo npm install -g ts-node
-        working-directory: backend-cdk
+        working-directory: backend
 
       - name: Install AWS CDK
         run: sudo npm install -g aws-cdk
-        working-directory: backend-cdk
+        working-directory: backend
 
       - name: Synthesize CDK
         run: npx cdk synth
-        working-directory: backend-cdk
+        working-directory: backend
 
       - name: CDK Deploy
         run: cdk deploy
-        working-directory: backend-cdk
+        working-directory: backend
