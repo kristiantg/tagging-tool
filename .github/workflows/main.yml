@@ -34,11 +34,11 @@ jobs:
         working-directory: backend-cdk
 
       - name: Install TS-Node
-        run: 'sudo npm install -g ts-node'
+        run: sudo npm install -g ts-node
         working-directory: backend-cdk
 
       - name: Install AWS CDK
-        run: 'sudo npm install -g aws-cdk'
+        run: sudo npm install -g aws-cdk
         working-directory: backend-cdk
 
       - name: Synthesize CDK
